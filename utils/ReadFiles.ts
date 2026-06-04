@@ -2,7 +2,7 @@ import fs from 'fs';
 import * as XLSX from 'xlsx';
 import { parse } from 'csv-parse/sync';
 
-export class ReadFiles {
+export default class ReadFiles {
 
     readJsonFile(filePath: string) {
         return JSON.parse(fs.readFileSync(filePath, 'utf-8'));

@@ -1,7 +1,7 @@
 import { expect, type Page } from '@playwright/test';
-import { PageObjects } from './PageObjects';
+import PageObjects from './PageObjects';
 
-export class PlaceOrderPage extends PageObjects {
+export default class PlaceOrderPage extends PageObjects {
 
     constructor(page: Page) {
         super(page); // parent class constructor

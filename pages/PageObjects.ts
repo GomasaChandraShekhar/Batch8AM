@@ -1,6 +1,6 @@
 import { type Page, type Locator } from '@playwright/test';
 
-export class PageObjects {
+export default class PageObjects {
 
     readonly page: Page;
     readonly userEmail: Locator;

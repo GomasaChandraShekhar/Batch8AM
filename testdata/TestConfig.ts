@@ -1,6 +1,6 @@
 
 
-export class TestConfig {
+export default class TestConfig {
 
     readonly url: string = 'https://rahulshettyacademy.com/client/#/auth/login';
     readonly userEmail: string = 'gomasachandrashekhar@gmail.com';

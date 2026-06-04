@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
-import { PageObjectManager } from '../pages/PageObjectManager';
-import { ReadFiles } from '../utils/ReadFiles';
+import PageObjectManager from '../pages/PageObjectManager';
+import ReadFiles from '../utils/ReadFiles';
 
 const readFiles = new ReadFiles();
 const dataFilePath = 'testdata/PlaceOrder.csv';

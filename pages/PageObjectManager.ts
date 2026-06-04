@@ -1,7 +1,7 @@
 import { type Page } from '@playwright/test';
-import { LoginPage } from './LoginPage'
-import { PlaceOrderPage } from './PlaceOrderPage';
-import { TestConfig } from '../testdata/TestConfig';
+import LoginPage from './LoginPage'
+import PlaceOrderPage from './PlaceOrderPage';
+import TestConfig from '../testdata/TestConfig';
 
 export default class PageObjectManager {
 
