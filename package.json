@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "Smoke": "npx playwright test 19placeorder.spec.ts --grep Smoke",
+    "Smoke": "npx playwright test Purchase.spec.ts --grep Smoke",
     "Regression": "npx playwright test",
     "WebRegression": "npx playwright test --grep Web"
   },
