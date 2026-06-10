@@ -1,11 +1,11 @@
 import { test, chromium } from '@playwright/test';
 
 
-test("Handling Shadow Element 1", async () => {
+test( "Handling Shadow Element 1", async () => {
 
-    const browser = await chromium.launch({
+    const browser = await chromium.launch( {
         headless: false
-    });
+    } );
     const context = await browser.newContext(
         {
             // proxy: {
@@ -37,40 +37,38 @@ test("Handling Shadow Element 1", async () => {
     );
 
     const allCoockies = await context.cookies();
-    console.log(allCoockies.length);
+    console.log( allCoockies.length );
 
-    console.table(allCoockies);
+    console.table( allCoockies );
 
-    for (const coockie of allCoockies) {
-        console.log(coockie.name);
-        console.log(coockie.domain);
-        console.log(coockie.value);
-        console.log(coockie.path);
+    for ( const coockie of allCoockies ) {
+        console.log( coockie.name );
+        console.log( coockie.domain );
+        console.log( coockie.value );
+        console.log( coockie.path );
     }
 
     await context.clearCookies();
-    console.log("After deleting coockies ::::::::::::::");
+    console.log( "After deleting coockies ::::::::::::::" );
 
     const allCoockiesafter = await context.cookies();
-    console.log(allCoockiesafter.length);
+    console.log( allCoockiesafter.length );
 
-    console.table(allCoockiesafter);
+    console.table( allCoockiesafter );
 
-    for (const coockie of allCoockiesafter) {
-        console.log(coockie.name);
-        console.log(coockie.domain);
-        console.log(coockie.value);
-        console.log(coockie.path);
+    for ( const coockie of allCoockiesafter ) {
+        console.log( coockie.name );
+        console.log( coockie.domain );
+        console.log( coockie.value );
+        console.log( coockie.path );
     }
 
     const page = await context.newPage();
-    await page.goto("https://testautomationpractice.blogspot.com/");
-    await page.waitForTimeout(3000);
-
+    await page.goto( "https://testautomationpractice.blogspot.com/" );
+    await page.waitForTimeout( 3000 );
 
 
     await page.close();
-
 
     /*
 
@@ -79,7 +77,7 @@ test("Handling Shadow Element 1", async () => {
 
     */
 
-});
+} );
 
 
 

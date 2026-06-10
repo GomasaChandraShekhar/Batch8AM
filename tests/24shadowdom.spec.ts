@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 
-test("Handling Shadow Element", async ({ page }) => {
+test( "Handling Shadow Element", async ( { page } ) => {
 
     // await page.goto("https://testautomationpractice.blogspot.com/");
     // await page.waitForTimeout(3000);
@@ -19,26 +19,26 @@ test("Handling Shadow Element", async ({ page }) => {
 
 
     //   https://selectorshub.com/xpath-practice-page/
-    await page.goto("https://selectorshub.com/iframe-in-shadow-dom/");
-    await page.waitForTimeout(3000);
+    await page.goto( "https://selectorshub.com/iframe-in-shadow-dom/" );
+    await page.waitForTimeout( 3000 );
 
     await page.pause();
 
-    const shadowRoot = page.locator('#userName');
+    const shadowRoot = page.locator( '#userName' );
 
-    const frame = shadowRoot.frameLocator('#pact1');
+    const frame = shadowRoot.frameLocator( '#pact1' );
 
-    const currentCrush = frame.getByRole('textbox', { name: 'Current Crush Name' });
+    const currentCrush = frame.getByRole( 'textbox', { name: 'Current Crush Name' } );
 
     await currentCrush.scrollIntoViewIfNeeded();
 
-    await currentCrush.fill("Playwright");
+    await currentCrush.fill( "Playwright" );
 
-    const frame2 = frame.frameLocator('#pact3');
+    const frame2 = frame.frameLocator( '#pact3' );
 
-    const destiny = frame2.getByRole('textbox', { name: 'Destiny' });
-    await destiny.fill("Playwright");
+    const destiny = frame2.getByRole( 'textbox', { name: 'Destiny' } );
+    await destiny.fill( "Playwright" );
 
     await page.close();
 
-});
+} );
