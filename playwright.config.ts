@@ -18,7 +18,10 @@ export default defineConfig( {
 
   // const oneYearInMs: 365 * 24 * 60 * 60 * 1000,
   // const randomRecentDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000),
-  reporter: [ [ 'html', { open: 'never' } ] ],
+  reporter: [
+    [ 'html', { open: 'never' } ],
+    [ 'allure-playwright' ]
+  ],
 
   /*[
     ['json', { outputFile: 'results.json' }],
