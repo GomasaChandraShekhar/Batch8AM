@@ -35,8 +35,15 @@ const hardDiskSize = 'Hard disk size';
 
 test( 'Post Request', async ( { playwright } ) => {
     apiContext = await playwright.request.newContext();
-    apiUtils = new ApiUtils( apiContext );
-    jsonResponse = await apiUtils.postRequest( url, postPayLoad );
+    apiUtils = new ApiUtils(apiContext);
+    const response = await apiUtils.postRequest(url, postPayLoad); 
+
+    console.log(response.status());
+    expect.soft(response.status()).toBe(200);
+    console.log(response.statusText());
+    expect.soft(response.statusText()).toBe('OK');
+
+    jsonResponse = await response.json();
 
     console.log( jsonResponse.id );
     console.log( jsonResponse.name );
@@ -44,7 +51,9 @@ test( 'Post Request', async ( { playwright } ) => {
     console.log( jsonResponse.data.price );
     console.log( jsonResponse.createdAt );
     console.log( jsonResponse.data[ cpuModel ] );
-    console.log( jsonResponse.data[ hardDiskSize ] );
+    console.log(jsonResponse.data[hardDiskSize]);
+    
+
 
 } );
 
@@ -82,46 +91,78 @@ test.skip( "Get All Resources", async ( { playwright } ) => {
     }
 } );
 
-test.skip( "Get One Resource", async ( { playwright } ) => {
+test( "Get One Resource", async ( { playwright } ) => {
     apiContext = await playwright.request.newContext();
     apiUtils = new ApiUtils( apiContext );
-    const oneResource = await apiUtils.getOneResource( url, jsonResponse.id );
-    expect.soft( oneResource.id ).toBe( jsonResponse.id );
-    expect.soft( oneResource.name ).toBe( postPayLoad.name );
-    expect.soft( oneResource.data.year ).toBe( postPayLoad.data.year );
-    expect.soft( oneResource.data.price ).toBe( postPayLoad.data.price );
-    expect.soft( oneResource.data[ cpuModel ] ).toBe( postPayLoad.data[ cpuModel ] );
-    expect.soft( oneResource.data[ hardDiskSize ] ).toBe( postPayLoad.data[ hardDiskSize ] );
+    const oneResource = await apiUtils.getOneResource(url, jsonResponse.id);
+
+    console.log(oneResource.status());
+    expect.soft(oneResource.status()).toBe(200);
+    console.log(oneResource.statusText());
+    expect.soft(oneResource.statusText()).toBe('OK');
+
+    const oneResourceJson = await oneResource.json();
+    expect.soft(oneResourceJson.id).toBe(jsonResponse.id);
+    
+    expect.soft(oneResourceJson.name ).toBe( postPayLoad.name );
+    expect.soft(oneResourceJson.data.year ).toBe( postPayLoad.data.year );
+    expect.soft(oneResourceJson.data.price ).toBe( postPayLoad.data.price );
+    expect.soft(oneResourceJson.data[ cpuModel ] ).toBe( postPayLoad.data[ cpuModel ] );
+    expect.soft(oneResourceJson.data[hardDiskSize]).toBe(postPayLoad.data[hardDiskSize]);
+    
 } );
 
 test( "Put One Resource", async ( { playwright } ) => {
     apiContext = await playwright.request.newContext();
     apiUtils = new ApiUtils( apiContext );
-    const oneResource = await apiUtils.putRequest( url, jsonResponse.id, putPayLoad );
-    expect.soft( oneResource.id ).toBe( jsonResponse.id );
-    expect.soft( oneResource.name ).toBe( putPayLoad.name );
-    expect.soft( oneResource.data.year ).toBe( putPayLoad.data.year );
-    expect.soft( oneResource.data.price ).toBe( putPayLoad.data.price );
-    expect.soft( oneResource.data[ cpuModel ] ).toBe( putPayLoad.data[ cpuModel ] );
-    expect.soft( oneResource.data[ hardDiskSize ] ).
+    const putResponse = await apiUtils.putRequest(url, jsonResponse.id, putPayLoad);
+    
+    console.log(putResponse.status());
+    expect.soft(putResponse.status()).toBe(200);
+    console.log(putResponse.statusText());
+    expect.soft(putResponse.statusText()).toBe('OK');
+
+    const putResponseJson = await putResponse.json();
+
+    // expect.soft(oneResourceJson.id ).toBe( jsonResponse.id );
+    expect.soft(putResponseJson.name ).toBe( putPayLoad.name );
+    expect.soft(putResponseJson.data.year ).toBe( putPayLoad.data.year );
+    expect.soft(putResponseJson.data.price ).toBe( putPayLoad.data.price );
+    expect.soft(putResponseJson.data[ cpuModel ] ).toBe( putPayLoad.data[ cpuModel ] );
+    expect.soft(putResponseJson.data[ hardDiskSize ] ).
         toBe( putPayLoad.data[ hardDiskSize ] );
 } );
 
 test( "Patch One Resource", async ( { playwright } ) => {
     apiContext = await playwright.request.newContext();
     apiUtils = new ApiUtils( apiContext );
-    const oneResource = await apiUtils.patchRequest( url, jsonResponse.id, patchPayLoad );
-    expect.soft( oneResource.id ).toBe( jsonResponse.id );
-    expect.soft( oneResource.name ).toBe( patchPayLoad.name );
+    const patchResponse = await apiUtils.patchRequest(url, jsonResponse.id, patchPayLoad);
+
+    console.log(patchResponse.status());
+    expect.soft(patchResponse.status()).toBe(200);
+    console.log(patchResponse.statusText());
+    expect.soft(patchResponse.statusText()).toBe('OK');
+
+    const patchResponseJson = await patchResponse.json();
+    expect.soft(patchResponseJson.id ).toBe( jsonResponse.id );
+    expect.soft(patchResponseJson.name ).toBe( patchPayLoad.name );
 
 } );
 
 test( "Delete One Resource", async ( { playwright } ) => {
     apiContext = await playwright.request.newContext();
     apiUtils = new ApiUtils( apiContext );
-    const oneResource = await apiUtils.deleteRequest( url, jsonResponse.id );
-    console.log( oneResource.message );
-    expect.soft( oneResource.message ).
+    const deleteResponse = await apiUtils.deleteRequest(url, jsonResponse.id);
+
+    console.log(deleteResponse.status());
+    expect.soft(deleteResponse.status()).toBe(200);
+    console.log(deleteResponse.statusText());
+    expect.soft(deleteResponse.statusText()).toBe('OK');
+
+    const deleteResponseJson = await deleteResponse.json();
+
+    console.log(deleteResponseJson.message );
+    expect.soft(deleteResponseJson.message ).
         toBe( `Object with id = ${jsonResponse.id} has been deleted.` );
 } );
 

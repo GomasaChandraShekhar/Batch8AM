@@ -1,4 +1,6 @@
 import { expect, test } from '@playwright/test';
+import ApiUtils from '../utils/ApiUtils';
+
 
 test("Post One Object", async ({ request }) => {
     const response = await request.post('https://api.restful-api.dev/objects',

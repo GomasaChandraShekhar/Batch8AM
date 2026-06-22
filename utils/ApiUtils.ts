@@ -1,4 +1,4 @@
-import { expect, APIRequestContext } from '@playwright/test';
+import { expect, APIRequestContext, APIResponse } from '@playwright/test';
 
 
 export default class ApiUtils {
@@ -9,7 +9,7 @@ export default class ApiUtils {
         this.apiContext = apiContext;
     }
 
-    async postRequest(url: string, payload: any): Promise<any> {
+    async postRequest(url: string, payload: any): Promise<APIResponse> {
 
         const response = await this.apiContext.post(url,
             {
@@ -19,29 +19,21 @@ export default class ApiUtils {
                 data: payload
             }
         );
-
-        console.log(response.status());
-        expect.soft(response.status()).toBe(200);
-        console.log(response.statusText());
-        expect.soft(response.statusText()).toBe('OK');
-
-        return await response.json();
-
+        return response;
     }
 
     async getAllResources(url: string) {
         const response = await this.apiContext.get(url);
-        return await response.json();
-
+        return response;
     }
 
     async getOneResource(url: string, id: string) {
         const response = await this.apiContext.get(url + '/' + id);
-        return await response.json();
+        return response;
 
     }
 
-    async putRequest(url: string, id: string, payload: any): Promise<any> {
+    async putRequest(url: string, id: string, payload: any) {
 
         const response = await this.apiContext.put(url + '/' + id,
             {
@@ -52,16 +44,11 @@ export default class ApiUtils {
             }
         );
 
-        console.log(response.status());
-        expect.soft(response.status()).toBe(200);
-        console.log(response.statusText());
-        expect.soft(response.statusText()).toBe('OK');
-
-        return await response.json();
+        return response;
 
     }
 
-    async patchRequest(url: string, id: string, payload: any): Promise<any> {
+    async patchRequest(url: string, id: string, payload: any){
 
         const response = await this.apiContext.patch(url + '/' + id,
             {
@@ -72,20 +59,13 @@ export default class ApiUtils {
             }
         );
 
-        console.log(response.status());
-        expect.soft(response.status()).toBe(200);
-        console.log(response.statusText());
-        expect.soft(response.statusText()).toBe('OK');
-        return await response.json();
+        return response;
     }
 
-    async deleteRequest(url: string, id: string): Promise<any> {
+    async deleteRequest(url: string, id: string){
         const response = await this.apiContext.delete(url + '/' + id);
-        console.log(response.status());
-        expect.soft(response.status()).toBe(200);
-        console.log(response.statusText());
-        expect.soft(response.statusText()).toBe('OK');
-        return await response.json();
+        
+        return response;
     }
 
 }
